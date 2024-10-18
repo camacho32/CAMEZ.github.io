@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camez Consultoría TI</title>
+    <link rel="stylesheet" href="./estilos/styles.css">
+</head>
+<body>
+    
+    <!-- Menú de navegación -->
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <div class="logo">
+                        <a href="#inicio">
+                            <img src="fotos/fondo-transformed.jpeg" alt="Camez Consultoría" class="logo">
+                        </a>
+                    </div>
+                </li>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Sección Hero -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Camez Consultoría TI</h1>
+            <p>Tu aliado en ciberseguridad, cloud y soluciones TI</p>
+            <a href="#servicios" class="btn">Ver Servicios</a>
+        </div>
+    </section>
+
+    <!-- Sección Servicios -->
+    <section id="servicios">
+        <img src="fotos/banner-transformed.jpeg" alt="Nuestros servicios" class="banner">
+        <div class="servicios-content">
+            <h2>Nuestros Servicios</h2>
+            <p>Ofrecemos soluciones innovadoras para empresas de cualquier nivel.</p><br>
+            <div id="lista-servicios">
+                <ul>
+                    <ul><strong>Auditorías</strong><li><a>Evaluamos tus sistemas y procesos, identificando vulnerabilidades y riesgos potenciales. Te ofrecemos soluciones personalizadas para fortalecer la seguridad de tus datos y garantizar el cumplimiento normativo, manteniendo la integridad y disponibilidad de tu infraestructura tecnológica.</a></li></ul><br>
+                    <ul><strong>Desarrollo Web</strong><li><a>Ofrecemos servicios especializados en consultoría de soluciones de TI para optimizar la eficiencia y productividad de tu empresa. Nuestro equipo experto te guiará en la implementación de tecnologías innovadoras.</a></li></ul><br>
+                    <ul><strong>Optimización Continua</strong><li><a>Nos encargamos del mantenimiento constante de tus sistemas para garantizar su óptimo funcionamiento. Realizamos actualizaciones periódicas y mejoras continuas para maximizar su rendimiento.</a></li></ul><br>
+                    <ul><strong>Asistencia Personalizada</strong><li><a>Brindamos un servicio de soporte técnico personalizado y eficiente para resolver cualquier incidencia de manera rápida y efectiva. Estamos comprometidos con tu tranquilidad y satisfacción.</a></ul>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Nosotros -->
+    <section id="nosotros">
+        <div class="nosotros-content">
+            <h2>¿Quiénes somos?</h2>
+        </div>
+            <p id="texto-nosotros">CAMEZ es una agencia consultora de soluciones de TI. Nuestro propósito es facilitar el crecimiento de las empresas a través de la adopción de soluciones tecnológicas avanzadas. Nos comprometemos a brindar servicios de calidad que reflejen innovación y confianza en un entorno moderno y profesional.</p>
+        <div class="nosotros-img">
+            <img src="fotos/Designer (1).jpeg" alt="Nuestro equipo" class="nosotros-img">
+            <img src="fotos/Designer (3).jpeg" alt="Nuestro equipo" class="nosotros-img">
+        </div>
+    </section>
+
+    <!-- Sección Contacto -->
+    <section id="contacto">
+    <div id="fondo-contacto">
+        <h2>Contacto</h2>
+        <form class="contact-form" id="contactForm">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required>
+            
+            <label for="telefono">Teléfono</label>
+            <input type="text" id="telefono" name="telefono" required>
+
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+
+            <button type="submit">Enviar</button>
+            <p id="mensaje-confirmacion" class="hidden"></p>
+        </form>
+    </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2024 Camez Consultoría TI. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Espera a que el DOM esté completamente cargado
+        document.addEventListener('DOMContentLoaded', function() {
+            // Añadir clase visible a la sección Hero
+            const heroContent = document.querySelector('.hero-content');
+            setTimeout(() => {
+                heroContent.classList.add('visible');
+            }, 300);
+
+            // Seleccionar secciones de servicios y nosotros
+            const serviciosContent = document.querySelector('#servicios');
+            const nosotrosContent = document.querySelector('#nosotros');
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+
+            observer.observe(serviciosContent);
+            observer.observe(nosotrosContent);
+
+            // Manejar el envío del formulario
+            document.getElementById('contactForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Evitar el envío del formulario
+
+                // Obtener los valores de los campos
+                const nombre = document.getElementById('nombre').value;
+                const email = document.getElementById('email').value;
+                const mensaje = document.getElementById('mensaje').value;
+
+                // Aquí puedes añadir la lógica para enviar los datos a tu servidor o procesarlos
+
+                // Mostrar un mensaje de respuesta
+                const mensajeConfirmacion = document.getElementById('mensaje-confirmacion');
+                mensajeConfirmacion.textContent = `Gracias ¡${nombre}! por su mensaje, Nos pondremos en contacto con usted pronto.`;
+                mensajeConfirmacion.classList.remove('hidden');
+
+                // Reiniciar el formulario
+                document.getElementById('contactForm').reset();
+            });
+        });
+    </script>
+</body>
+</html>
